@@ -3,14 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('KEY')
-            storePassword '1234567890'
-            keyAlias 'key'
-            keyPassword '1234567890'
-        }
+    buildFeatures {
+        viewBinding true
     }
+
     compileSdk 33
 
     defaultConfig {
@@ -23,10 +19,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    signingConfigs {
+        debug {
+            storeFile file('KEY')
+            storePassword '1234567890'
+            keyAlias 'key'
+            keyPassword '1234567890'
+        }
     }
+
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
@@ -37,8 +38,14 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-    buildFeatures {
-        viewBinding true
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
